@@ -23,7 +23,7 @@ function submit() {
   var qanswer = document.getElementById("answer").value;
   
   if (qanswer.toLowerCase() === questions[currentQuestion].answer.toLowerCase()) {
-    alert('Correct!');
+    document.getElementById("answer").value= '';
     currentQuestion++;
     if (currentQuestion < questions.length) {
       displayQuestion();
