@@ -38,7 +38,7 @@ function submit() {
 }
 
 function displayQuestion() {
-  document.getElementById("question").innerHTML = questions[currentQuestion].question;
+  document.getElementById("questiontext").innerHTML = questions[currentQuestion].question;
   document.getElementById("cn").innerHTML = '';
 }
 
@@ -47,7 +47,7 @@ displayQuestion();
   </script>
 </head>
 <body>
-  <p id="question">What is 1 + 44?</p>
+  <p id="questiontext">What is 1 + 44?</p>
   <p><span id='cn' style='color:red;'></span></p>
   <input id="answer" placeholder='Type Here'>
   <input type="submit" onclick="submit()" value="Submit">
