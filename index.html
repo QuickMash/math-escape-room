@@ -8,20 +8,40 @@
   <link rel="stylesheet" type="text/css" href="style.css" />
   <link rel="icon" href="favicon.png">
   <script>
-    question = 1
+    var currentQuestion = 0;
+
+// Array of objects containing questions and their corresponding correct answers
+var questions = [
+  { question: "What is 6 times 7?", answer: "42" },
+  { question: "What is the capital of France?", answer: "Paris" },
+  // Add more questions and answers here
+];
+
 function submit() {
   var qanswer = document.getElementById("answer").value;
-  var question = 1; // Assuming question starts with 1
-
-  if (question === 1) { // Use triple equals for strict comparison
-    if (qanswer === '45') { // Use triple equals for strict comparison
-      question = 2;
-      alert('Yeah');
+  
+  if (qanswer.toLowerCase() === questions[currentQuestion].answer.toLowerCase()) {
+    alert('Correct!');
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+      displayQuestion();
     } else {
-      document.getElementById("cn").innerHTML = 'Incorrect!';
+      alert('All questions answered!');
+      // Optionally reset the currentQuestion variable if you want to restart the quiz
+      // currentQuestion = 0;
     }
+  } else {
+    document.getElementById("cn").innerHTML = 'Incorrect!';
   }
 }
+
+function displayQuestion() {
+  document.getElementById("question").innerHTML = questions[currentQuestion].question;
+  document.getElementById("cn").innerHTML = '';
+}
+
+// Display the first question when the page loads
+displayQuestion();
   </script>
 </head>
 <body>
