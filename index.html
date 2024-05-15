@@ -7,10 +7,15 @@
   <meta name="description" content="" />
   <link rel="stylesheet" type="text/css" href="style.css" />
   <script>
-    document.getElementById('script-check').innerhtml = "<p><b>Press start to play!<b></p><br><button class='start' onclick='start()'>Start</button>"
+    function startbtn() {
+      document.getElementById('script-check').innerhtml = "<p><b>Press start to play!<b></p><br><button class='start' onclick='start()'>Start</button>"
+    }
+    function start() {
+
+    }
   </script>
 </head>
-<body>
+<body onload='startbtn'>
   <h1>Back Story</h1>
   <p>You were in the wrong place at the wrong time. You were stopping by the bank after your skiing trip. As you entered the bank, ski gear still on, the tellers exchanged nervous glances. Suddenly, the security alarm blared, and you found yourself surrounded by police officers...</p>
   <noscript><b>Please Enable JavaScript to play.</b></noscript>
