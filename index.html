@@ -9,16 +9,19 @@
   <link rel="icon" href="favicon.png">
   <script>
     question = 1
-    function submit() {
-      qanswer = document.getElementById("answer").value;
-      if (question = 1){
-        if (qanswer = '45') {
-            question = 2
-          alert('Yeah')
-        }else{
-          document.getElementById("cn").innerhtml = 'Incorrect!'
-        
+function submit() {
+  var qanswer = document.getElementById("answer").value;
+  var question = 1; // Assuming question starts with 1
+
+  if (question === 1) { // Use triple equals for strict comparison
+    if (qanswer === '45') { // Use triple equals for strict comparison
+      question = 2;
+      alert('Yeah');
+    } else {
+      document.getElementById("cn").innerHTML = 'Incorrect!';
     }
+  }
+}
   </script>
 </head>
 <body>
