@@ -28,7 +28,7 @@ function submit() {
     if (currentQuestion < questions.length) {
       displayQuestion();
     } else {
-      alert('All questions answered!');
+      location.replace("./functions.html");
       // Optionally reset the currentQuestion variable if you want to restart the quiz
       // currentQuestion = 0;
     }
@@ -47,6 +47,7 @@ displayQuestion();
   </script>
 </head>
 <body>
+  <p>To get through this room, finish all the questions.</p>
   <p id="questiontext"></p>
   <p><span id='cn' style='color:red;'></span></p>
   <input id="answer" placeholder='Type Here'>
