@@ -1,65 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Math Escape Room</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="School final project escape room" />
-  <link rel="stylesheet" type="text/css" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="School final project escape room">
+  <link rel="stylesheet" type="text/css" href="style.css">
   <link rel="icon" href="favicon.png">
   <script>
     var currentQuestion = 0;
 
-// Array of objects containing questions, image URLs, and their corresponding correct answers
-var questions = [
-  { question: "What animal is this?", imageUrl: "https://example.com/animal_image.jpg", answer: "lion" },
-  { question: "What is the capital of the United States?", imageUrl: "", answer: "Washington DC" },
-  { question: "What is the capital of the Pacific Ocean?", imageUrl: "", answer: "There is no capital" },
-  // Add more questions and answers here
-];
+    // Array of objects containing questions, image URLs, and their corresponding correct answers
+    var questions = [
+      { question: "What animal is this?", imageUrl: "https://example.com/animal_image.jpg", answer: "lion" },
+      { question: "What is √9?", imageUrl: "", answer: "3" },
+      // Add more questions and answers here
+    ];
 
-function submit() {
-  var qanswer = document.getElementById("answer").value;
-  
-  if (qanswer.toLowerCase() === questions[currentQuestion].answer.toLowerCase()) {
-    document.getElementById("answer").value = '';
-    currentQuestion++;
-    if (currentQuestion < questions.length) {
-      displayQuestion();
-    } else {
-      // Redirect to another page when all questions are answered
-      location.replace("./functions.html");
+    function submit() {
+      var qanswer = document.getElementById("answer").value;
+      
+      if (qanswer.toLowerCase() === questions[currentQuestion].answer.toLowerCase()) {
+        document.getElementById("answer").value = '';
+        currentQuestion++;
+        if (currentQuestion < questions.length) {
+          displayQuestion();
+        } else {
+          // Redirect to another page when all questions are answered
+          location.replace("./functions.html");
+        }
+      } else {
+        document.getElementById("cn").innerHTML = 'Incorrect!';
+      }
     }
-  } else {
-    document.getElementById("cn").innerHTML = 'Incorrect!';
-  }
-}
 
-function displayQuestion() {
-  var questionContainer = document.getElementById("question-container");
-  questionContainer.innerHTML = '';
-  
-  var questionText = document.createElement("p");
-  questionText.innerHTML = questions[currentQuestion].question;
-  questionContainer.appendChild(questionText);
-  
-  if (questions[currentQuestion].imageUrl) {
-    var image = document.createElement("img");
-    image.src = questions[currentQuestion].imageUrl;
-    questionContainer.appendChild(image);
-  }
-  
-  document.getElementById("cn").innerHTML = '';
-}
+    function displayQuestion() {
+      var questionContainer = document.getElementById("question-container");
+      questionContainer.innerHTML = '';
+      
+      var questionText = document.createElement("p");
+      questionText.innerHTML = questions[currentQuestion].question;
+      questionContainer.appendChild(questionText);
+      
+      if (questions[currentQuestion].imageUrl) {
+        var image = document.createElement("img");
+        image.src = questions[currentQuestion].imageUrl;
+        questionContainer.appendChild(image);
+      }
+      
+      document.getElementById("cn").innerHTML = '';
+    }
 
-// Display the first question when the page loads
-displayQuestion();
-
+    // Display the first question when the page loads
+    window.onload = function() {
+      displayQuestion();
+    };
   </script>
 </head>
 <body>
   <p>To get through this room, finish all the questions.</p>
-  <p id="questiontext">What is &radic;<span style='text-decoration:overline;'>9</span>?</p>
+  <div id="question-container"></div>
   <p><span id='cn' style='color:red;'></span></p>
   <input id="answer" placeholder='Type Here'>
   <input type="submit" onclick="submit()" value="Submit">
