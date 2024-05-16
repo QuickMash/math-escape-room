@@ -8,14 +8,13 @@
   <link rel="stylesheet" type="text/css" href="style.css" />
   <link rel="icon" href="favicon.png">
   <script>
-    var currentQuestion = 0;
-document.getElementById("questionetext").innerHTML = "What is" + Math.sqrt(9);
+var currentQuestion = 0;
+
 // Array of objects containing questions and their corresponding correct answers
 var questions = [
-  { question: "What is " + Math.sqrt(9);, answer: "3" },
-  { question: "What is " + Math.sqrt(9);, answer: "3" },
-  { question: "What is the capital of The United States?", answer: "Washington DC" },
-  { question: "What is the capital of the pacific ocean?", answer: "IDK" },
+  { question: "What is " + "&radic;<span style='text-decoration:overline;'>9</span>?", answer: "3" },
+  { question: "What is the capital of the United States?", answer: "Washington DC" },
+  { question: "What is the capital of the Pacific Ocean?", answer: "There is no capital" },
   // Add more questions and answers here
 ];
 
@@ -23,14 +22,13 @@ function submit() {
   var qanswer = document.getElementById("answer").value;
   
   if (qanswer.toLowerCase() === questions[currentQuestion].answer.toLowerCase()) {
-    document.getElementById("answer").value= '';
+    document.getElementById("answer").value = '';
     currentQuestion++;
     if (currentQuestion < questions.length) {
       displayQuestion();
     } else {
+      // Redirect to another page when all questions are answered
       location.replace("./functions.html");
-      // Optionally reset the currentQuestion variable if you want to restart the quiz
-      // currentQuestion = 0;
     }
   } else {
     document.getElementById("cn").innerHTML = 'Incorrect!';
@@ -41,7 +39,7 @@ function displayQuestion() {
   document.getElementById("questiontext").innerHTML = questions[currentQuestion].question;
   document.getElementById("cn").innerHTML = '';
 }
-displayQuestion()
+
 // Display the first question when the page loads
 displayQuestion();
   </script>
