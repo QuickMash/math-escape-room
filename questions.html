@@ -8,6 +8,51 @@
   <link rel="stylesheet" type="text/css" href="style.css" />
   <link rel="icon" href="favicon.png">
   <script>
+    var currentQuestion = 0;
+
+// Array of objects containing questions and their corresponding correct answers
+var questions = [
+  { question: "What is the square root of 9?", answer: "3" },
+  { question: "What is the capital of the United States?", answer: "Washington DC" },
+  { question: "What is the capital of the Pacific Ocean?", answer: "There is no capital" },
+  // Add more questions and answers here
+];
+
+function submit() {
+  var qanswer = document.getElementById("answer").value;
+  
+  if (qanswer.toLowerCase() === questions[currentQuestion].answer.toLowerCase()) {
+    document.getElementById("answer").value = '';
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+      displayQuestion();
+    } else {
+      // Redirect to another page when all questions are answered
+      location.replace("./functions.html");
+    }
+  } else {
+    document.getElementById("cn").innerHTML = 'Incorrect!';
+  }
+}
+
+function displayQuestion() {
+  document.getElementById("questiontext").innerHTML = questions[currentQuestion].question;
+  document.getElementById("cn").innerHTML = '';
+}
+
+// Display the first question when the page loads
+displayQuestion();
+This code should function as a basic quiz. When a user answers a question, it checks if the answer is correct and then proceeds to the next question until all questions are answered. If the user answers incorrectly, it displays a message indicating the mistake.
+
+
+
+
+I want to use the square root of sign
+ChatGPT
+If you want to use the square root symbol (√) instead of writing out "square root", you can include it directly in your HTML or use the HTML entity for the square root symbol. Here's how you can modify the code to include the square root symbol:
+
+javascript
+Copy code
 var currentQuestion = 0;
 
 // Array of objects containing questions and their corresponding correct answers
@@ -37,6 +82,58 @@ function submit() {
 
 function displayQuestion() {
   document.getElementById("questiontext").innerHTML = questions[currentQuestion].question;
+  document.getElementById("cn").innerHTML = '';
+}
+
+// Display the first question when the page loads
+displayQuestion();
+In this modified version, I've used the HTML entity &radic; for the square root symbol. Additionally, I've wrapped the number 9 in a <span> element with CSS styling to represent the radical (√9). This should display the square root symbol for the first question.
+
+how would I do a question with an image
+ChatGPT
+To include an image in a question, you can modify the structure of your questions array to include a property for the image URL. Here's an example of how you can do it:
+
+javascript
+Copy code
+var currentQuestion = 0;
+
+// Array of objects containing questions, image URLs, and their corresponding correct answers
+var questions = [
+  { question: "What animal is this?", imageUrl: "https://example.com/animal_image.jpg", answer: "lion" },
+  { question: "What is the capital of the United States?", answer: "Washington DC" },
+  { question: "What is the capital of the Pacific Ocean?", answer: "There is no capital" },
+  // Add more questions and answers here
+];
+
+function submit() {
+  var qanswer = document.getElementById("answer").value;
+  
+  if (qanswer.toLowerCase() === questions[currentQuestion].answer.toLowerCase()) {
+    document.getElementById("answer").value = '';
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+      displayQuestion();
+    } else {
+      // Redirect to another page when all questions are answered
+      location.replace("./functions.html");
+    }
+  } else {
+    document.getElementById("cn").innerHTML = 'Incorrect!';
+  }
+}
+
+function displayQuestion() {
+  var questionContainer = document.getElementById("question-container");
+  questionContainer.innerHTML = '';
+  
+  var questionText = document.createElement("p");
+  questionText.innerHTML = questions[currentQuestion].question;
+  questionContainer.appendChild(questionText);
+  
+  var image = document.createElement("img");
+  image.src = questions[currentQuestion].imageUrl;
+  questionContainer.appendChild(image);
+  
   document.getElementById("cn").innerHTML = '';
 }
 
