@@ -7,9 +7,24 @@
   <meta name="description" content="Starting Page" />
   <link rel="stylesheet" type="text/css" href="style.css" />
   <style>
+    		button {
+			color: #ffffff;
+			background-color: #53e151;
+			font-size: 50px;
+			border: 1px solid #ffffff;
+			border-radius: 300px;
+			padding: 15px 10px;
+			letter-spacing: 12px;
+			cursor: pointer
+		}
+		button:hover {
+			color: #ffffff;
+			background-color: #37ff00;
+		}
     body {
       background: #333;
       color: white;
+      font-family: sans-serif;
       text-align: center;
     }
   </style>
@@ -19,6 +34,6 @@
   <p>You were in the wrong place at the wrong time. You were stopping by the bank after your skiing trip. As you entered the bank, ski gear still on, the tellers exchanged nervous glances. Suddenly, the security alarm blared, and you found yourself surrounded by police officers...</p>
   <noscript><b>Please Enable JavaScript to play.</b></noscript>
   <p><b>Press start to play!<b></p>
-  <button class='start' onclick='location.replace("./questions.html")'>Start</button>
+    <button onclick='location.replace("./questions.html")' type="button" name="startbtn">START</button>
 </body>
 </html>
