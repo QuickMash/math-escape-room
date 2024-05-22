@@ -12,6 +12,12 @@
       font-family: sans-serif;
       background-image: url('images/image.jpeg');
     }
+    .container {
+      border-radius: 20%;
+      background-color: white;
+      padding: 10px;
+      opacity: 0.5;
+    }
   </style>
   <script>
     var currentQuestion = 0;
@@ -76,10 +82,12 @@
   </script>
 </head>
 <body>
-  <p>To get through this room, finish all the questions.</p>
-  <div id="question-container"></div>
-  <p><span id='cn' style='color:red;'></span></p>
-  <input id="answer" placeholder='Type Here'>
-  <input type="submit" onclick="submit()" value="Submit">
+  <div class="container">
+    <p>To get through this room, finish all the questions.</p>
+    <div id="question-container"></div>
+    <p><span id='cn' style='color:red;'></span></p>
+    <input id="answer" placeholder='Type Here'>
+    <input type="submit" onclick="submit()" value="Submit">
+  </div>
 </body>
 </html>
