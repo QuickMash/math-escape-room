@@ -11,12 +11,25 @@
     body {
       font-family: sans-serif;
       background-image: url('images/bricks.png');
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+      text-align: center;
     }
     .container {
       border-radius: 10px;
       background-color: white;
       padding: 20px;
       opacity: 0.8;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    input[type="submit"] {
+      margin-top: 10px;
     }
   </style>
   <script>
@@ -30,69 +43,79 @@
       { question: "What is 2^10", imageUrl: "", answer: "1024" },
       { question: "Solve.", imageUrl: "images/line.png", answer: "y=4x+3" },
       { question: "Solve. 2.48 x 10^2", imageUrl: "", answer: "248" },
-      { question: "Solve. 4(3x-6)+4=16",answer: "x=3" },
-      { question: "Solve. 10^4+2^5",answer: "10032" },
-      { question: "Solve. 8+8^3",answer: "520" },
-      { question: "Solve. √1024",answer: "32" },
-      { question: "Solve. 10^6 &times 2",answer: "2000000" },
-      { question: "Solve. you almost get caught to not let you plan fail answer this question 10+10+10+10",answer: "40"},
-      { question: "Solve. 2^10+-3",answer: "1021"},
-      { question: "Solve. a dog is chasing a squirrel at 5 meters per second how long does it take for him to run 30 meters?",answer: "6"},
-      { question: "Solve. for the last problem the guards take a break every 30 minutes and every hour to switch places. When they take a break it is for 5 minutes the first break is at 1:30 when is the next break when they switch positions?",answer: "2:30"},
-      { question: "Solve. (1/2)^3",answer: "0.125" },
-      { question: "Solve. 4.5 &times 10^6",answer: "4500000" },
+      { question: "Solve. 4(3x-6)+4=16", answer: "x=3" },
+      { question: "Solve. 10^4+2^5", answer: "10032" },
+      { question: "Solve. 8+8^3", answer: "520" },
+      { question: "Solve. √1024", answer: "32" },
+      { question: "Solve. 10^6 &times 2", answer: "2000000" },
+      { question: "Solve. you almost get caught to not let you plan fail answer this question 10+10+10+10", answer: "40" },
+      { question: "Solve. 2^10+-3", answer: "1021" },
+      { question: "Solve. a dog is chasing a squirrel at 5 meters per second how long does it take for him to run 30 meters?", answer: "6" },
+      { question: "Solve. for the last problem the guards take a break every 30 minutes and every hour to switch places. When they take a break it is for 5 minutes the first break is at 1:30 when is the next break when they switch positions?", answer: "2:30" },
+      { question: "Solve. (1/2)^3", answer: "0.125" },
+      { question: "Solve. 4.5 &times 10^6", answer: "4500000" },
       // Add more questions and answers here
-]
+    ];
+
     function submit() {
       var qanswer = document.getElementById("answer").value;
-      
+      var feedback = document.getElementById("cn");
+
       if (qanswer.toLowerCase() === questions[currentQuestion].answer.toLowerCase()) {
+        feedback.style.color = 'green';
+        feedback.innerHTML = 'Correct!';
         document.getElementById("answer").value = '';
         currentQuestion++;
         if (currentQuestion < questions.length) {
-          displayQuestion();
+          setTimeout(displayQuestion, 1000); // Move to the next question after 1 second
         } else {
           // Redirect to another page when all questions are answered
-          location.replace("./end.html");
+          setTimeout(function() { location.replace("./end.html"); }, 1000);
         }
       } else {
-        document.getElementById("cn").innerHTML = 'Incorrect!';
+        feedback.style.color = 'red';
+        feedback.innerHTML = 'Incorrect! Try again.';
       }
     }
 
     function displayQuestion() {
       var questionContainer = document.getElementById("question-container");
       questionContainer.innerHTML = '';
-      
+
       var questionText = document.createElement("p");
       questionText.innerHTML = questions[currentQuestion].question;
       questionContainer.appendChild(questionText);
-      
+
       if (questions[currentQuestion].imageUrl) {
         var image = document.createElement("img");
         image.src = questions[currentQuestion].imageUrl;
         questionContainer.appendChild(image);
       }
-      
+
       document.getElementById("cn").innerHTML = '';
     }
 
     // Display the first question when the page loads
     window.onload = function() {
       displayQuestion();
+
+      // Add event listener to the input field for the Enter key
+      document.getElementById("answer").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+          submit();
+        }
+      });
     };
   </script>
 </head>
 <body>
   <h1>Escape Room</h1>
-  <br>
   <div class="container">
     <div id="question-container">To get through this room, finish all the questions.</div>
-    <p><span id='cn' style='color:red;'></span></p>
+    <p><span id='cn'></span></p>
     <input id="answer" placeholder='Type Here'>
     <input type="submit" onclick="submit()" value="Submit">
-    <footer>
-    </footer>
+    <footer></footer>
   </div>
 </body>
 </html>
