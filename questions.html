@@ -11,6 +11,7 @@
     body {
       font-family: sans-serif;
       background-image: url('images/bricks.png');
+      background-size: cover;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -29,6 +30,11 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
     input[type="submit"] {
+      margin-top: 10px;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
       margin-top: 10px;
     }
   </style>
@@ -54,7 +60,6 @@
       { question: "Solve. for the last problem the guards take a break every 30 minutes and every hour to switch places. When they take a break it is for 5 minutes the first break is at 1:30 when is the next break when they switch positions?", answer: "2:30" },
       { question: "Solve. (1/2)^3", answer: "0.125" },
       { question: "Solve. 4.5 &times 10^6", answer: "4500000" },
-      { question: "Solve. √256", answer: "16" },
       // Add more questions and answers here
     ];
 
