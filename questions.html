@@ -11,6 +11,7 @@
     body {
       font-family: sans-serif;
       background-image: url('images/bricks.png');
+      background-size: cover;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -35,6 +36,25 @@
       max-width: 100%;
       height: auto;
       margin-top: 10px;
+    }
+    #calculator {
+      display: none;
+      position: absolute;
+      top: 50px;
+      left: 50px;
+      width: 200px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      z-index: 1000;
+    }
+    #calculator input[type="button"] {
+      width: 45px;
+      height: 45px;
+      margin: 5px;
+      font-size: 18px;
     }
   </style>
   <script>
@@ -93,12 +113,52 @@
 
       if (questions[currentQuestion].imageUrl) {
         var image = document.createElement("img");
-        image.value = 'Loading';
         image.src = questions[currentQuestion].imageUrl;
         questionContainer.appendChild(image);
       }
 
       document.getElementById("cn").innerHTML = '';
+    }
+
+    function showCalculator() {
+      var calculator = document.getElementById("calculator");
+      calculator.style.display = 'block';
+    }
+
+    function hideCalculator() {
+      var calculator = document.getElementById("calculator");
+      calculator.style.display = 'none';
+    }
+
+    // Dragging functionality
+    function dragElement(element) {
+      var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      element.onmousedown = dragMouseDown;
+
+      function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+      }
+
+      function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        element.style.top = (element.offsetTop - pos2) + "px";
+        element.style.left = (element.offsetLeft - pos1) + "px";
+      }
+
+      function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
     }
 
     // Display the first question when the page loads
@@ -111,7 +171,37 @@
           submit();
         }
       });
+
+      dragElement(document.getElementById("calculator"));
     };
+
+    // Calculator functionality
+    function insert(num) {
+      document.form.textview.value = document.form.textview.value + num;
+    }
+
+    function equal() {
+      var exp = document.form.textview.value;
+      if(exp) {
+        document.form.textview.value = eval(exp);
+      }
+    }
+
+    function sqrt() {
+      var exp = document.form.textview.value;
+      if(exp) {
+        document.form.textview.value = Math.sqrt(eval(exp));
+      }
+    }
+
+    function clean() {
+      document.form.textview.value = "";
+    }
+
+    function back() {
+      var exp = document.form.textview.value;
+      document.form.textview.value = exp.substring(0,exp.length-1);
+    }
   </script>
 </head>
 <body>
@@ -121,7 +211,36 @@
     <p><span id='cn'></span></p>
     <input id="answer" placeholder='Type Here'>
     <input type="submit" onclick="submit()" value="Submit">
+    <button onclick="showCalculator()">Open Calculator</button>
     <footer></footer>
+  </div>
+  <div id="calculator">
+    <form name="form">
+      <input type="text" name="textview">
+    </form>
+    <input type="button" value="1" onclick="insert(1)">
+    <input type="button" value="2" onclick="insert(2)">
+    <input type="button" value="3" onclick="insert(3)">
+    <input type="button" value="+" onclick="insert('+')">
+    <br>
+    <input type="button" value="4" onclick="insert(4)">
+    <input type="button" value="5" onclick="insert(5)">
+    <input type="button" value="6" onclick="insert(6)">
+    <input type="button" value="-" onclick="insert('-')">
+    <br>
+    <input type="button" value="7" onclick="insert(7)">
+    <input type="button" value="8" onclick="insert(8)">
+    <input type="button" value="9" onclick="insert(9)">
+    <input type="button" value="*" onclick="insert('*')">
+    <br>
+    <input type="button" value="C" onclick="clean()">
+    <input type="button" value="0" onclick="insert(0)">
+    <input type="button" value="/" onclick="insert('/')">
+    <input type="button" value="=" onclick="equal()">
+    <br>
+    <input type="button" value="√" onclick="sqrt()">
+    <input type="button" value="←" onclick="back()">
+    <button onclick="hideCalculator()">Close</button>
   </div>
 </body>
 </html>
